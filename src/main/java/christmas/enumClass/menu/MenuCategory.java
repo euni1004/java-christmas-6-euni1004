@@ -1,6 +1,6 @@
 package christmas.enumClass.menu;
 
-public enum Menu {
+public enum MenuCategory {
     APPETIZER("애피타이저"),
     MAIN("메인"),
     DESSERT("디저트"),
@@ -8,7 +8,7 @@ public enum Menu {
 
     private final String description;
 
-    Menu(String description) {
+    MenuCategory(String description) {
         this.description = description;
     }
 
