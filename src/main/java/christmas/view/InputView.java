@@ -1,15 +1,17 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.service.Validator;
+import christmas.controller.InputController;
+import christmas.model.Validator;
 
 public class InputView {
+
+    InputController inputController = new InputController();
+
     public int readDate() {
         System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
         String input = Console.readLine();
-        int day = Validator.isNumeric(input);
-        Validator.isValidDay(day);
-        return day;
+        return inputController.dateController(input);
     }
 
     public String readMenu(){
