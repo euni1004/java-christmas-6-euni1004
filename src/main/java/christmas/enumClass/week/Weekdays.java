@@ -2,8 +2,8 @@ package christmas.enumClass.week;
 
 public enum Weekdays {
 
-    WEEKDAY("평일"),
-    WEEKEND("주말");
+    WEEKDAY("평일 할인"),
+    WEEKEND("주말 할인");
 
     private final String weekdays;
 

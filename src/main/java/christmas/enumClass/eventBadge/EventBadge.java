@@ -14,11 +14,16 @@ public enum EventBadge {
         this.minPrice = minPrice;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getMinPrice() {
-        return minPrice;
+    public static String calculateBadge(int discountAmount) {
+        if (discountAmount >= SANTA.minPrice) {
+            return SANTA.name;
+        }
+        if (discountAmount >= TREE.minPrice) {
+            return TREE.name;
+        }
+        if (discountAmount >= STAR.minPrice) {
+            return STAR.name;
+        }
+        return null;
     }
 }

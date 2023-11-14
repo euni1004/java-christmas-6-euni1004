@@ -30,9 +30,9 @@ public enum MenuItem {
         this.menuCategory = menuCategory;
     }
 
-    public static MenuItem fromString(String menuItem){
-        for(MenuItem menu : MenuItem.values()){
-            if(menu.getName().equals(menuItem)){
+    public static MenuItem fromString(String menuItem) {
+        for (MenuItem menu : MenuItem.values()) {
+            if (menu.getName().equals(menuItem)) {
                 return menu;
             }
         }
@@ -43,11 +43,16 @@ public enum MenuItem {
         return name;
     }
 
-    public int getPrice() {
+    public int sumPrice(int sum) {
+        sum += this.price;
+        return sum;
+    }
+
+    public int getPrice(){
         return price;
     }
 
-    public MenuCategory getMenu() {
+    public MenuCategory getMenuCategory() {
         return menuCategory;
     }
 }

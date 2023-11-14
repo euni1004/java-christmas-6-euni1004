@@ -1,6 +1,7 @@
 package christmas;
 
 import christmas.controller.InputController;
+import christmas.controller.OutputController;
 import christmas.domain.Menu;
 import java.util.List;
 
@@ -12,5 +13,7 @@ public class Application {
         int day = inputController.dateController();
 
         List<Menu> menu = inputController.menuController();
+        new OutputController(menu,day).outputController();
+
     }
 }
