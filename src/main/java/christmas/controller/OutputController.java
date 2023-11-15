@@ -40,7 +40,7 @@ public class OutputController {
         CalculateDiscountService calculateDiscountService) {
         int benefitAmount = 0;
         if (totalAmountBeforeDiscount >= 10000) {
-            Map<String, Integer> benefitDetail = printBenefitDetailsController(totalAmountBeforeDiscount);
+            Map<String, Integer> benefitDetail = calculateDiscountService.printBenefitDetailsController(totalAmountBeforeDiscount);
             outputView.printBenefitDetailsOverMan(benefitDetail);
             benefitAmount = calculateDiscountService.calculateTotalDiscount(benefitDetail);
         }
@@ -50,13 +50,4 @@ public class OutputController {
         return benefitAmount;
     }
 
-    private Map<String, Integer> printBenefitDetailsController(int totalBeforeDiscount) {
-        CalculateDiscountService calculateDiscountService = new CalculateDiscountService(menu, day);
-        Map<String, Integer> benefitDetails = new HashMap<>();
-        benefitDetails.putAll(calculateDiscountService.calculateDiscountForDay());
-        benefitDetails.putAll(calculateDiscountService.calculateDiscountForWeek());
-        benefitDetails.putAll(calculateDiscountService.calculateDiscountForSpecialDay());
-        benefitDetails.putAll(calculateDiscountService.calculateDiscountForGift(totalBeforeDiscount));
-        return benefitDetails;
-    }
 }

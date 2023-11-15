@@ -27,7 +27,7 @@ public class MenuService {
         return input.split(",");
     }
 
-    public String[] splitMenuToBar(String tempMenu) {
+    private String[] splitMenuToBar(String tempMenu) {
         return tempMenu.split("-");
     }
 

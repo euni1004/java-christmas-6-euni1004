@@ -7,6 +7,7 @@ import christmas.enumClass.menu.MenuItem;
 import christmas.enumClass.week.DayOdTheWeek;
 import christmas.enumClass.week.Weekdays;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +43,16 @@ public class CalculateDiscountService {
         return NOEXIST;
     }
 
-    public Map<String, Integer> calculateDiscountForDay() {
+    public Map<String, Integer> printBenefitDetailsController(int totalBeforeDiscount) {
+        Map<String, Integer> benefitDetails = new HashMap<>();
+        benefitDetails.putAll(calculateDiscountForDay());
+        benefitDetails.putAll(calculateDiscountForWeek());
+        benefitDetails.putAll(calculateDiscountForSpecialDay());
+        benefitDetails.putAll(calculateDiscountForGift(totalBeforeDiscount));
+        return benefitDetails;
+    }
+
+    private Map<String, Integer> calculateDiscountForDay() {
         if (day > 25) {
             return Map.of("크리스마스 디데이 할인", 0);
         }
@@ -50,7 +60,7 @@ public class CalculateDiscountService {
         return Map.of("크리스마스 디데이 할인", discount);
     }
 
-    public Map<String, Integer> calculateDiscountForWeek() {
+    private Map<String, Integer> calculateDiscountForWeek() {
         int remind = day % 7;
         Weekdays weekdays = DayOdTheWeek.calculateWeekdays(remind);
 
@@ -72,14 +82,14 @@ public class CalculateDiscountService {
             .sum() * DISCOUNTFORWEEK;
     }
 
-    public Map<String, Integer> calculateDiscountForSpecialDay() {
+    private Map<String, Integer> calculateDiscountForSpecialDay() {
         if (SPECIALDAY.contains(day)) {
             return Map.of("특별 할인", 1000);
         }
         return Map.of("특별 할인", 0);
     }
 
-    public Map<String, Integer> calculateDiscountForGift(int totalBeforeDiscount) {
+    private Map<String, Integer> calculateDiscountForGift(int totalBeforeDiscount) {
         if (totalBeforeDiscount >= MIN_GIFTPRIZE) {
             return Map.of("증정 이벤트", MenuItem.CHAMPAGNE.getPrice());
         }

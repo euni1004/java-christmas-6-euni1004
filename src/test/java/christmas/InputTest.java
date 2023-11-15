@@ -75,7 +75,7 @@ public class InputTest {
         assertDoesNotThrow(() -> menuService.validateMenuByBeverage(expectedMenus));
     }
 
-    @DisplayName("음료 여부에 따른 테스트")
+    @DisplayName("음료 여부에 따른 테스트/한번에")
     @ParameterizedTest
     @CsvSource({
         "ZERO_COLA, 1, true",
@@ -108,6 +108,26 @@ public class InputTest {
         } else {
             System.out.println("정규식 불일치!");
         }
+    }
+
+    @DisplayName("같은 메뉴 어려번 작성시 에러")
+    @Test
+    void testRepetMenu(){
+        String input = "해산물파스타-2,레드와인-1,해산물파스타-1";
+        MenuService menuService = new MenuService();
+        assertThatThrownBy(() -> menuService.createMenu(input)).isInstanceOf(CustomException.class);
+    }
+
+    @DisplayName("메뉴의 합이 20을 넘을때 에러")
+    @Test
+    void testMenuSumOver20(){
+        List<Menu> menus = Arrays.asList(
+            new Menu(MenuItem.ZERO_COLA, 7),
+            new Menu(MenuItem.RED_WINE, 7),
+            new Menu(MenuItem.T_BONE_STEAK, 7)
+        );
+        MenuService menuService = new MenuService();
+        assertThatThrownBy(() -> menuService.isValidMenuSum(menus)).isInstanceOf(CustomException.class);
     }
 
 }
